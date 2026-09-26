@@ -1,1 +1,27 @@
-<p>home works!</p>
+<main class="shell center">
+  <section class="hero-card">
+    <div class="brand">RBS STAT<span>•</span></div>
+    <p class="eyebrow">Dashboard</p>
+    <h1 id="welcome-title">Выберите режим</h1>
+
+    <div class="mode-grid">
+      <button type="button" class="mode-card" (click)="observer()">
+        <span class="icon" aria-hidden="true">◉</span>
+        <span>
+          <strong>Наблюдатель</strong>
+          <small>Только просмотр статистики</small>
+        </span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </button>
+
+      <button type="button" class="mode-card" (click)="admin()">
+        <span class="icon" aria-hidden="true">⌘</span>
+        <span>
+          <strong>Админ</strong>
+          <small>Создание и редактирование статистики</small>
+        </span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </button>
+    </div>
+  </section>
+</main>
