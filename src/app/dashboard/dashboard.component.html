@@ -1,1 +1,53 @@
-<p>dashboard works!</p>
+<main class="shell">
+  <header class="topbar">
+    <a class="brand" routerLink="/">STAT<span>•</span></a>
+    <span class="pill">Наблюдатель</span>
+    <a class="text-button" routerLink="/">Сменить режим</a>
+  </header>
+
+  <section class="page-heading">
+    <p class="eyebrow">Live overview</p>
+    <h1>Статистика</h1>
+    <p class="muted">Только просмотр.</p>
+  </section>
+
+  @if (statistics().length === 0) {
+    <section class="empty-card">
+      <h2>Статистика пока не создана</h2>
+    </section>
+  }
+
+  <div class="stat-grid">
+    @for (stat of statistics(); track stat.id) {
+      <section class="stat-card" [attr.aria-labelledby]="'stat-' + stat.id">
+        <div class="stat-card-head">
+          <h2 [id]="'stat-' + stat.id">{{ stat.title }}</h2>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Показатель</th>
+                @for (column of stat.columns; track column) {
+                  <th scope="col">{{ column }}</th>
+                }
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (row of stat.rows; track row.id) {
+                <tr>
+                  <th scope="row">{{ row.label }}</th>
+                  @for (column of stat.columns; track column) {
+                    <td>{{ row.values[column] ?? 0 }}</td>
+                  }
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+    }
+  </div>
+</main>
