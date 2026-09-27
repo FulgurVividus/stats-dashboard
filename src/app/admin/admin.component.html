@@ -47,6 +47,7 @@
       <button class="primary-button" type="button" (click)="addStatistic()">
         + Добавить статистику
       </button>
+
       <button
         class="secondary-button"
         type="button"
@@ -54,6 +55,9 @@
       >
         Сменить пароль
       </button>
+
+      <button class="secondary-button" type="button" (click)="shareDashboard()">Поделиться</button>
+
       <a class="secondary-button link-button" routerLink="/dashboard">Открыть просмотр</a>
     </div>
 
@@ -70,6 +74,7 @@
               (input)="currentPassword.set($event.target.value)"
             />
           </label>
+
           <label
             >Новый пароль
             <input
@@ -80,12 +85,15 @@
             />
           </label>
         </div>
+
         @if (passwordMessage()) {
           <p class="success" role="status">{{ passwordMessage() }}</p>
         }
+
         @if (passwordError()) {
           <p class="error" role="alert">{{ passwordError() }}</p>
         }
+
         <button class="primary-button" type="button" (click)="changePassword()">
           Сохранить пароль
         </button>
@@ -100,6 +108,7 @@
               <span>Заголовок</span>
               <input [value]="stat.title" (input)="updateTitle(stat.id, $event.target.value)" />
             </label>
+
             <button class="danger-button" type="button" (click)="deleteStatistic(stat.id)">
               Удалить
             </button>
@@ -112,6 +121,7 @@
                 + Колонка
               </button>
             </div>
+
             <div class="chip-list">
               @for (column of stat.columns; track column; let i = $index) {
                 <div class="chip">
@@ -120,6 +130,7 @@
                     (input)="renameColumn(stat.id, i, $event.target.value)"
                     aria-label="Название колонки"
                   />
+
                   <button
                     type="button"
                     (click)="removeColumn(stat.id, i)"
@@ -137,6 +148,7 @@
               <h3>Строки</h3>
               <button class="small-button" type="button" (click)="addRow(stat.id)">+ Строка</button>
             </div>
+
             <div class="row-editor">
               @for (row of stat.rows; track row.id) {
                 <div class="row-editor-item">
@@ -146,6 +158,7 @@
                     (input)="renameRow(stat.id, row.id, $event.target.value)"
                     aria-label="Название строки"
                   />
+
                   @for (column of stat.columns; track column) {
                     <label class="number-field">
                       <span>{{ column }}</span>
@@ -157,6 +170,7 @@
                       />
                     </label>
                   }
+
                   <button
                     class="icon-button"
                     type="button"
