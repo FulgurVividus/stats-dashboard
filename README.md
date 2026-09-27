@@ -1,4 +1,6 @@
-# StatsDashboard
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cfdba3f3-7920-454b-b0aa-50105287de10/deploy-status)](https://app.netlify.com/projects/shuklin-stats-dashboard/deploys)
+
+# Shuklin Stats Dashboard
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.0.
 
