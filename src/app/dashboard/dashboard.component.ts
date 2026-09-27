@@ -1,6 +1,8 @@
-import { Component, computed, inject } from "@angular/core";
-import { StorageService } from "../shared/services/storage.service";
+import { Component, inject, signal } from "@angular/core";
 import { RouterLink } from "@angular/router";
+import { StorageService } from "../shared/services/storage.service";
+import { ShareService } from "../shared/services/share.service";
+import type { Statistic } from "../shared/models/models";
 
 @Component({
   imports: [RouterLink],
@@ -10,6 +12,11 @@ import { RouterLink } from "@angular/router";
 })
 export class DashboardComponent {
   private readonly storage = inject(StorageService);
+  private readonly share = inject(ShareService);
 
-  readonly statistics = computed(() => this.storage.data().statistics);
+  readonly statistics = signal<Statistic[]>(this.loadStatistics());
+
+  private loadStatistics(): Statistic[] {
+    return this.share.readStatisticsFromUrl() ?? this.storage.data().statistics;
+  }
 }

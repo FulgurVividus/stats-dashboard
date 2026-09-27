@@ -3,6 +3,7 @@ import { Router, RouterLink } from "@angular/router";
 import { StorageService } from "../shared/services/storage.service";
 import { AuthService } from "../shared/services/auth.service";
 import { Statistic } from "../shared/models/models";
+import { ShareService } from "../shared/services/share.service";
 
 @Component({
   imports: [RouterLink],
@@ -13,6 +14,7 @@ import { Statistic } from "../shared/models/models";
 export class AdminComponent {
   private readonly storage = inject(StorageService);
   private readonly auth = inject(AuthService);
+  private readonly share = inject(ShareService);
   private readonly router = inject(Router);
 
   readonly statistics = signal<Statistic[]>(this.storage.data().statistics);
@@ -224,6 +226,13 @@ export class AdminComponent {
     this.currentPassword.set("");
     this.newPassword.set("");
     this.passwordMessage.set("Пароль изменён.");
+  }
+
+  shareDashboard() {
+    const url = this.share.createDashboardUrl(this.statistics());
+
+    navigator.clipboard.writeText(url);
+    alert("Скопировано!");
   }
 
   private update(transform: (stats: Statistic[]) => Statistic[]) {
