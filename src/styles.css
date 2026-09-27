@@ -77,15 +77,18 @@ thead th {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  text-align: center;
 }
 
 tbody th {
   font-weight: 600;
+  text-align: center;
 }
 
 td {
   font-variant-numeric: tabular-nums;
   font-weight: 600;
+  text-align: center;
 }
 
 .shell {
@@ -127,9 +130,65 @@ td {
   color: #735cff;
 }
 
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.topbar .text-button {
+  margin-left: auto;
+}
+
+.brand {
+  text-decoration: none;
+  color: #09090c;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+}
+
+.brand span {
+  color: #735cff;
+}
+
+.page-heading {
+  padding: 70px 0 28px;
+}
+
+.page-heading h1 {
+  font-size: clamp(38px, 5vw, 64px);
+}
+
+.hero-card,
+.auth-card,
+.password-card,
+.editor-card,
+.stat-card,
+.empty-card {
+  background: #fff;
+  border: 1px solid #e6e7eb;
+  border-radius: 24px;
+  box-shadow: 0 12px 40px rgba(20, 20, 30, 0.06);
+}
+
 @media (min-width: 2200px) {
   th,
   td {
     padding: 22px 24px;
+  }
+}
+
+@media (max-width: 680px) {
+  .topbar {
+    gap: 8px;
+  }
+
+  .topbar .brand {
+    margin-right: auto;
+  }
+
+  .page-heading {
+    padding-top: 46px;
   }
 }

@@ -1,1 +1,179 @@
-<p>admin works!</p>
+<main class="shell">
+  <header class="topbar">
+    <a class="brand" routerLink="/">SHUKLIN STATS <span>•</span></a>
+
+    @if (authenticated()) {
+      <span class="pill admin-pill">Админ</span>
+      <button class="text-button" type="button" (click)="logout()">Выйти</button>
+    } @else {
+      <a class="text-button" routerLink="/">Назад</a>
+    }
+  </header>
+
+  @if (!authenticated()) {
+    <section class="auth-card center-card" aria-labelledby="admin-title">
+      <p class="eyebrow">Restricted area</p>
+      <h1 id="admin-title">Вход админа</h1>
+      <p class="muted">Введите пароль для доступа к конструктору статистики.</p>
+
+      <form (submit)="login($event)">
+        <label for="password">Пароль</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          [value]="password()"
+          (input)="password.set($event.target.value)"
+          required
+          autofocus
+        />
+
+        @if (loginError()) {
+          <p class="error" role="alert">Неверный пароль.</p>
+        }
+
+        <button class="primary-button full" type="submit">Войти</button>
+      </form>
+    </section>
+  } @else {
+    <section class="page-heading">
+      <p class="eyebrow">Admin workspace</p>
+      <h1>Конструктор статистики</h1>
+      <p class="muted">Создавайте блоки, меняйте заголовки, строки, колонки и значения.</p>
+    </section>
+
+    <div class="admin-actions">
+      <button class="primary-button" type="button" (click)="addStatistic()">
+        + Добавить статистику
+      </button>
+      <button
+        class="secondary-button"
+        type="button"
+        (click)="showPasswordForm.set(!showPasswordForm())"
+      >
+        Сменить пароль
+      </button>
+      <a class="secondary-button link-button" routerLink="/dashboard">Открыть просмотр</a>
+    </div>
+
+    @if (showPasswordForm()) {
+      <section class="password-card">
+        <h2>Смена пароля</h2>
+        <div class="form-grid">
+          <label
+            >Текущий пароль
+            <input
+              type="password"
+              autocomplete="current-password"
+              [value]="currentPassword()"
+              (input)="currentPassword.set($any($event.target).value)"
+            />
+          </label>
+          <label
+            >Новый пароль
+            <input
+              type="password"
+              autocomplete="new-password"
+              [value]="newPassword()"
+              (input)="newPassword.set($any($event.target).value)"
+            />
+          </label>
+        </div>
+        @if (passwordMessage()) {
+          <p class="success" role="status">{{ passwordMessage() }}</p>
+        }
+        @if (passwordError()) {
+          <p class="error" role="alert">{{ passwordError() }}</p>
+        }
+        <button class="primary-button" type="button" (click)="changePassword()">
+          Сохранить пароль
+        </button>
+      </section>
+    }
+
+    <div class="editor-list">
+      @for (stat of statistics(); track stat.id) {
+        <article class="editor-card">
+          <div class="editor-head">
+            <label class="title-field">
+              <span>Заголовок</span>
+              <input
+                [value]="stat.title"
+                (input)="updateTitle(stat.id, $any($event.target).value)"
+              />
+            </label>
+            <button class="danger-button" type="button" (click)="deleteStatistic(stat.id)">
+              Удалить
+            </button>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-head">
+              <h3>Колонки / дни</h3>
+              <button class="small-button" type="button" (click)="addColumn(stat.id)">
+                + Колонка
+              </button>
+            </div>
+            <div class="chip-list">
+              @for (column of stat.columns; track column; let i = $index) {
+                <div class="chip">
+                  <input
+                    [value]="column"
+                    (input)="renameColumn(stat.id, i, $any($event.target).value)"
+                    aria-label="Название колонки"
+                  />
+                  <button
+                    type="button"
+                    (click)="removeColumn(stat.id, i)"
+                    aria-label="Удалить колонку"
+                  >
+                    ×
+                  </button>
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="subsection">
+            <div class="subsection-head">
+              <h3>Строки</h3>
+              <button class="small-button" type="button" (click)="addRow(stat.id)">+ Строка</button>
+            </div>
+            <div class="row-editor">
+              @for (row of stat.rows; track row.id) {
+                <div class="row-editor-item">
+                  <input
+                    class="row-label"
+                    [value]="row.label"
+                    (input)="renameRow(stat.id, row.id, $any($event.target).value)"
+                    aria-label="Название строки"
+                  />
+                  @for (column of stat.columns; track column) {
+                    <label class="number-field">
+                      <span>{{ column }}</span>
+                      <input
+                        type="number"
+                        min="0"
+                        [value]="row.values[column] ?? 0"
+                        (input)="setValue(stat.id, row.id, column, $any($event.target).value)"
+                      />
+                    </label>
+                  }
+                  <button
+                    class="icon-button"
+                    type="button"
+                    (click)="removeRow(stat.id, row.id)"
+                    aria-label="Удалить строку"
+                  >
+                    ×
+                  </button>
+                </div>
+              }
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</main>
