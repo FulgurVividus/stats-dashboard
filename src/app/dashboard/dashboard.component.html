@@ -40,7 +40,7 @@
                 <tr>
                   <th scope="row">{{ row.label }}</th>
                   @for (column of stat.columns; track column) {
-                    <td>{{ row.values[column] ?? 0 }}</td>
+                    <td>{{ (row.values[column] ?? 0).toLocaleString("ru-RU") }}</td>
                   }
                 </tr>
               }
