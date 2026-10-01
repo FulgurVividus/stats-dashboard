@@ -172,10 +172,136 @@ td {
   box-shadow: 0 12px 40px rgba(20, 20, 30, 0.06);
 }
 
-@media (min-width: 2200px) {
+@media (min-width: 3000px) {
+  :root {
+    font-size: 24px;
+  }
+
+  .shell {
+    width: min(2600px, calc(100% - 120px));
+    padding-top: 56px;
+    padding-bottom: 120px;
+  }
+
+  .brand {
+    font-size: 34px;
+  }
+
+  .text-button {
+    font-size: 20px;
+  }
+
+  .page-heading {
+    padding: 110px 0 50px;
+  }
+
+  .page-heading h1 {
+    font-size: 88px;
+  }
+
+  .eyebrow {
+    font-size: 17px;
+  }
+
+  .muted {
+    font-size: 21px;
+  }
+
+  .pill {
+    font-size: 17px;
+    padding: 12px 18px;
+  }
+
   th,
   td {
-    padding: 22px 24px;
+    padding: 26px 32px;
+    font-size: 22px;
+  }
+
+  thead th {
+    font-size: 16px;
+  }
+
+  .stat-card-head {
+    padding: 34px 36px 18px;
+  }
+
+  .stat-card h2 {
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 2200px) {
+  :root {
+    font-size: 20px;
+  }
+
+  body {
+    font-size: 1rem;
+  }
+
+  .shell {
+    width: min(2200px, calc(100% - 80px));
+    padding-top: 44px;
+    padding-bottom: 100px;
+  }
+
+  .topbar {
+    gap: 24px;
+  }
+
+  .brand {
+    font-size: 28px;
+  }
+
+  .text-button {
+    padding: 12px 16px;
+    font-size: 17px;
+  }
+
+  .page-heading {
+    padding: 90px 0 40px;
+  }
+
+  .page-heading h1 {
+    font-size: clamp(52px, 4vw, 82px);
+  }
+
+  .eyebrow {
+    margin-bottom: 12px;
+    font-size: 15px;
+  }
+
+  .muted {
+    font-size: 18px;
+  }
+
+  .pill {
+    padding: 10px 15px;
+    font-size: 15px;
+  }
+
+  th,
+  td {
+    padding: 22px 26px;
+    font-size: 18px;
+  }
+
+  thead th {
+    font-size: 14px;
+  }
+
+  tbody th {
+    font-size: 18px;
+  }
+
+  .hero-card,
+  .auth-card,
+  .password-card,
+  .editor-card,
+  .stat-card,
+  .empty-card {
+    border-radius: 30px;
   }
 }
 

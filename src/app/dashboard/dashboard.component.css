@@ -56,7 +56,15 @@
 }
 
 @media (min-width: 2200px) {
+  .stat-grid {
+    gap: 28px;
+  }
+
   .stat-card-head {
-    padding: 32px;
+    padding: 30px 32px 16px;
+  }
+
+  .stat-card h2 {
+    font-size: 28px;
   }
 }

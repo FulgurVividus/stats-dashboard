@@ -275,6 +275,95 @@ input:focus {
   font-weight: 700;
 }
 
+@media (min-width: 2200px) {
+  .admin-actions {
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .primary-button,
+  .secondary-button,
+  .danger-button,
+  .small-button {
+    padding: 14px 20px;
+    font-size: 17px;
+    border-radius: 14px;
+  }
+
+  .editor-list {
+    gap: 28px;
+  }
+
+  .editor-card {
+    padding: 32px;
+    border-radius: 30px;
+  }
+
+  .editor-head {
+    gap: 20px;
+  }
+
+  .subsection {
+    margin-top: 34px;
+  }
+
+  .subsection-head {
+    margin-bottom: 18px;
+  }
+
+  .subsection-head h3 {
+    font-size: 20px;
+  }
+
+  .chip-list {
+    gap: 12px;
+  }
+
+  .chip input {
+    width: 190px;
+    padding: 15px;
+    font-size: 17px;
+  }
+
+  .chip button {
+    width: 48px;
+    height: 50px;
+    font-size: 24px;
+  }
+
+  .row-editor {
+    gap: 14px;
+  }
+
+  .row-editor-item {
+    gap: 12px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .row-label {
+    width: 240px;
+  }
+
+  .number-field {
+    width: 170px;
+  }
+
+  .number-field span {
+    font-size: 14px;
+  }
+
+  input {
+    padding: 15px 16px;
+    font-size: 17px;
+    border-radius: 14px;
+  }
+
+  label {
+    font-size: 16px;
+  }
+}
+
 @media (max-width: 680px) {
   .form-grid {
     grid-template-columns: 1fr;
